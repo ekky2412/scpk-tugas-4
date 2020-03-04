@@ -95,25 +95,37 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
     set(hObject,'BackgroundColor','white');
 end
 
-
+function cek = tahun2(thn)
+if(mod(thn,4)==0)
+    if(mod(thn,100)==0)
+        if(mod(thn,400)==0)
+            cek=1;
+        else
+            cek=0;
+        end
+    else
+        cek=1;
+    end
+else
+    cek=0;
+end
+    
 % --- Executes on button press in push.
+
 function push_Callback(hObject, eventdata, handles)
 % hObject    handle to push (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-if (mod(str2num(get(handles.tahun,'string')),4)==0)
-    if(mod(str2num(get(handles.tahun,'string')),100)==0)
-        if(mod(str2num(get(handles.tahun,'string')),400)==0)
-            set(handles.hasil,'string',(num2str(get(handles.tahun,'string'))+" merupakan Tahun Kabisat"));
-        else
-            set(handles.hasil,'string',(num2str(get(handles.tahun,'string'))+" bukan Tahun Kabisat"));
-        end
-    else
-        set(handles.hasil,'string',(num2str(get(handles.tahun,'string'))+" merupakan Tahun Kabisat"));
-    end
+thn = str2num(get(handles.tahun,'string'));
+year = num2str(thn);
+%set(handles.hasil,'string',year);
+bruh = tahun2(thn);
+if(bruh==1)
+    pesan = year + " merupakan Tahun Kabisat";
 else
-    set(handles.hasil,'string',(num2str(get(handles.tahun,'string'))+" bukan Tahun Kabisat"));
+    pesan = year + " bukan Tahun Kabisat";
 end
+set(handles.hasil,'string',pesan);
 
 
 % --- Executes on button press in back.

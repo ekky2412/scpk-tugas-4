@@ -72,16 +72,20 @@ function varargout = luasVolumeBalok_OutputFcn(hObject, eventdata, handles)
 % Get default command line output from handles structure
 varargout{1} = handles.output;
 
+function luas = luasP(panjang,lebar,tinggi)
+luas = 2*(panjang*lebar+lebar*tinggi+panjang*tinggi);
+
+function volume = volumeB(panjang,lebar,tinggi)
+volume = panjang*lebar*tinggi;
 
 % --- Executes on button press in btnHitung.
 function btnHitung_Callback(hObject, eventdata, handles)
 % hObject    handle to btnHitung (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-luas = 2*(str2num(get(handles.panjang,'string'))*str2num(get(handles.lebar,'string'))+str2num(get(handles.lebar,'string'))*str2num(get(handles.tinggi,'string'))+str2num(get(handles.tinggi,'string'))*str2num(get(handles.panjang,'string')));
-volume = str2num(get(handles.panjang,'string'))*str2num(get(handles.lebar,'string'))*str2num(get(handles.tinggi,'string'));
-set(handles.luaspermukaan,'string',num2str(luas));
-set(handles.volume,'string',num2str(volume));
+%volume = str2num(get(handles.panjang,'string'))*str2num(get(handles.lebar,'string'))*str2num(get(handles.tinggi,'string'));
+set(handles.luaspermukaan,'string',num2str(luasP(str2num(get(handles.panjang,'string')),str2num(get(handles.lebar,'string')),str2num(get(handles.tinggi,'string')))));
+set(handles.volume,'string',num2str(volumeB(str2num(get(handles.panjang,'string')),str2num(get(handles.lebar,'string')),str2num(get(handles.tinggi,'string')))));
 
 function panjang_Callback(hObject, eventdata, handles)
 % hObject    handle to panjang (see GCBO)
